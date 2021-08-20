@@ -17,7 +17,7 @@ function Article(){
     const [articlesData, setArticlesData] = useState([]);
     const BASE_URL = 'https://run.mocky.io/v3/99da4b92-4c70-4c5e-ac01-17dd4c1649d2';
     const [isLoading, setIsLoading] = useState(false);
-    const [isDoing, setIsDoing] = useState(false);
+    const [isDoing, setIsDoing] = useState(null);
     
     useEffect(() => {
         console.log(articlesData);
@@ -40,19 +40,25 @@ function Article(){
             })
     }
 
-    const onClickButton = () => {
-        setIsDoing(!isDoing);
+    const onClickDoing = () => {
+        setIsDoing(true);
+    }
+    const onClickWaiting = () => {
+        setIsDoing(false);
     }
 
     return (
         <div>
-            <>
-                <button style={buttonStyle} onClick={onClickButton}>Doing</button>
-                <button style={buttonStyle} onClick={onClickButton}>Waiting</button>
-            </>
-            {isDoing == true &&
+            
+                <button style={buttonStyle} onClick={onClickDoing}>Doing</button>
+                <button style={buttonStyle} onClick={onClickWaiting}>Waiting</button>
+                <>
+                {isDoing==true && <h3>Doing Item </h3>}
+                 {isDoing==false && <h3>Waiting Item </h3>}
+                </>
+            {isDoing === true &&
                 articlesData.map((item,index) =>(
-                    item.status === 'doing' && 
+                    item.status === 'doing' && item.isDeleted === false &&
                     <>
                         {isDoing === true && 
                             <>
@@ -63,9 +69,9 @@ function Article(){
                     </>
                 ))
             }
-            {isDoing == false &&
+            {isDoing === false &&
                 articlesData.map((item,index) =>(
-                    item.status === 'waiting' && 
+                    item.status === 'waiting' && item.isDeleted === false &&
                     <>
                         {isDoing === false && 
                             <>
