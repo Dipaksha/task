@@ -47,8 +47,8 @@ function Article(){
     return (
         <div>
             <>
-                <Button title='Doing' onPress={onClick}></Button>
-                <Button title='Waiting' onPress={onClick}></Button>
+                <button style={buttonStyle} onClick={onClickButton}>Doing</button>
+                <button style={buttonStyle} onClick={onClickButton}>Waiting</button>
             </>
             {isDoing == true &&
                 articlesData.map((item,index) =>(
@@ -67,7 +67,7 @@ function Article(){
                 articlesData.map((item,index) =>(
                     item.status === 'waiting' && 
                     <>
-                        {isDoing === true && 
+                        {isDoing === false && 
                             <>
                                 <li>{item.title}</li>
                                 <li>{item.description}</li>
